@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             FileInputStream fileIn=openFileInput(FILENAME);
             InputStreamReader InputRead= new InputStreamReader(fileIn);
 
-            char[] inputBuffer= new char[1000];
+            char[] inputBuffer= new char[100000];
             String s="";
             int charRead;
 
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte[] b = baos.toByteArray();
-            String temp = Base64.encodeToString(b, Base64.DEFAULT);
+            String temp = Base64.encodeToString(b,Base64.NO_WRAP);
             return temp;
         } catch (NullPointerException e) {
             return null;
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static Bitmap StringToBitmap(String encodedString) {
         try {
-            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            byte[] encodeByte = Base64.decode(encodedString, Base64.NO_WRAP);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             return bitmap;
         } catch (NullPointerException e) {
